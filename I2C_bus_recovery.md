@@ -1,9 +1,8 @@
 ---
 created	:	Mon Jun 24 13:40:30 CST 2024
-date	:	.
+date	:	Mon Jun 24 17:26:30 CST 2024
 
 -------------------------------------------------------------------------------
-
 # I2C bus recovery #
 這個原理是我們要測試
 SMbus **可能**幾萬次後 有機率發生
@@ -15,7 +14,7 @@ SMbus **可能**幾萬次後 有機率發生
 
 > BMC basic : BMC normal status --> high (這樣device 才能溝通)
 
-也因為這樣 所以 stroke 大大他們設計了一個設備
+也因為這樣 所以 stroke 大大他們設計了一個設備 (**OT004**)
 *搞破壞*的設備 (不管你BMC 是不是有在溝通 他都會把device 拉住)
 當BMC看到你的訊號被blocked住32ms後
 就會釋放掉他 **等於reset**
@@ -23,8 +22,8 @@ SMbus **可能**幾萬次後 有機率發生
 # how to do #
 
 ## equipment ##
-1. 這裡可以用的是 big power (我們通常有兩種 power)
-2. 有一個線是 brian 的 涂 做的接線 (brian's al dupont lines)
+1. ATX :  big power (我們通常有兩種 power)
+2. 有一個線是 杜邦線 的接線 (brian's al dupont lines)
 3. OT004   破壞設備
 ![3](./pic/I2C_bus_recovery_de.jpg)
 
@@ -39,7 +38,7 @@ SMbus **可能**幾萬次後 有機率發生
 至於接法 要看電路圖
 我依照 6102的例子來寫
 
-會有4個(因為要讓 BMC 被stroke 設備來 執行 所以 要知道 SDA CLK GND VCC **這個是 I2C的基礎喔!!!**)
+SDA CLK GND VCC
 ![connect_de](./pic/I2C_bus_recovery_connect.jpg)
 
 這裡我是依照 brian's al dupont lines 的紅色來看(反正不是CLK 就是 SDA)
@@ -64,4 +63,4 @@ SMbus **可能**幾萬次後 有機率發生
 
 I2C recovery function success --> 閃爍橘燈
 
-我測試 很快 所以都會直接拉住 --> I2C recovery function success
+我測試 很快 所以都會直接到
