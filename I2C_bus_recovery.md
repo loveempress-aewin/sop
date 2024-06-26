@@ -72,4 +72,4 @@ SDA CLK GND VCC
 
 I2C recovery function success --> 閃爍橘燈
 
-我測試 很快 所以都會直接到
+我測試 很快 所以都會直接到 閃爍橘燈
