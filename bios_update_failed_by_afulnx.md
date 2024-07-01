@@ -11,9 +11,39 @@ date	:	Mon Jul  1 15:37:51 CST 2024
 如果都成功 我們來看 bmc console
 
 ```bash
+###### BMC console
 ~ # CMD BIOS update: on progress
 update_timeout_sec = 600
 CMD BIOS update: success
+```
+```bash
+###### OS
+
+root@updatetool:/home/update/bbu/5222#   /root/afulnx_64 5222R10C.bin /P /R /N /X /R /K
++---------------------------------------------------------------------------+
+|                 AMI Firmware Update Utility v5.16.01.0109                 |
+|      Copyright (c) 1985-2023, American Megatrends International LLC.      |
+|         All rights reserved. Subject to AMI licensing agreement.          |
++---------------------------------------------------------------------------+
+ Reading flash ...................... Done
+ - ME Data Size Checking ............ Pass
+ - FFS Checksums .................... Pass
+ - Check RomLayout .................. Pass
+ Erasing Main Block ................. Done
+  Updating Main Block ................ Done
+  Verifying Main Block ............... Done
+  Erasing Boot Block ................. Done
+  Updating Boot Block ................ Done
+  Verifying Boot Block ............... Done
+  Erasing NVRAM Block ................ Done
+  Updating NVRAM Block ............... Done
+  Verifying NVRAM Block .............. Done
+  Erasing NCB Block .................. Done
+  Updating NCB Block ................. Done
+  Verifying NCB Block ................ Done
+
+
+  Process completed.
 ```
 很顯然 最後一段 當然是 bios update success!
 
@@ -86,4 +116,18 @@ BIOS update timeout
 ```
 不過也是從**BMC console** 我才知道原來他有 設定time
 ![](./pic/bios_update_failed_by_afulnx_result.png)
+然後當 `BIOS update timeout`
+同時 我測試的5222
+硬體有跑出error
+power blue light bliking
+reset red light bliking
+UID oregin light blikning
 
+-------------------------------------------------------------------------------
+
+## solution ##
+當然這個軟刷的中斷
+可以再使用 `afulnx_64`
+
+reflash !!!
+這不像WEBUI介面 爆炸 就全部爆炸了....
