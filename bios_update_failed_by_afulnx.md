@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 created	:	Fri Jun 28 14:17:47 CST 2024
-date	:	Mon Jul  1 15:37:51 CST 2024
+date	:	Mon Jul  1 17:49:34 CST 2024
 
 -------------------------------------------------------------------------------
 #  afulnx_update #
@@ -77,7 +77,7 @@ Updateing Main Block ................ 0x001F9000 (9%)
 > 當然如果 你要丟入 BK中 也可喔~~ []~(￣▽￣)~*
 
 ```bash
-root@updatetool:~#  ps  -a
+root@updatetool:~#  task
 s    PID TTY          TIME CMD
    1163 tty1     00:00:00 bash
    1691 pts/0    00:00:52 afulnx_64
