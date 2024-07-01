@@ -119,9 +119,9 @@ BIOS update timeout
 然後當 `BIOS update timeout`
 同時 我測試的5222
 硬體有跑出error
-power blue light bliking
-reset red light bliking
-UID oregin light blikning
++ power blue light bliking
++ reset red light bliking
++ UID oregin light blikning
 
 -------------------------------------------------------------------------------
 
