@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 created	:	Fri Jun 28 14:17:47 CST 2024
-date	:	Mon Jul  1 17:49:34 CST 2024
+date	:	Wed Jul  3 16:47:41 CST 2024
 
 -------------------------------------------------------------------------------
 #  afulnx_update #
@@ -8,7 +8,7 @@ date	:	Mon Jul  1 17:49:34 CST 2024
 
 在做 update 的時候
 
-如果都成功 我們來看 bmc console
+if all success--> bmc console
 
 ```bash
 ###### BMC console
@@ -49,13 +49,10 @@ root@updatetool:/home/update/bbu/5222#   /root/afulnx_64 5222R10C.bin /P /R /N /
 
 如果失敗 的話 那就要等 10 分鐘 就會開始 閃爍 red light
 
-然後 bmc console 會 顯示甚麼呢??
-
-
 
 intentional human error
 =======================
-首先 我們先看 OS 的部分
+首先  OS的部分
 ```bash
 root@updatetool:/home/update/bbu/5222#   /root/afulnx_64 5222R10C.bin /P /R /N /X /R /K
 +---------------------------------------------------------------------------+
@@ -72,9 +69,8 @@ Updateing Main Block ................ 0x001F9000 (9%)
 
 ```
 
-當然我們要 插斷 就需要用 另外一個 session 來完成
+當然要插斷 就需要用 另外一個 session 來完成
 
-> 當然如果 你要丟入 BK中 也可喔~~ []~(￣▽￣)~*
 
 ```bash
 root@updatetool:~#  task
@@ -85,10 +81,8 @@ s    PID TTY          TIME CMD
 root@updatetool:~#   kill  1691
 ```
 
-很即時的你會看到 當我下kill
-他就直接變成
 ```bash
-root@updatetool:/home/update/bbu/5222#   /root/afulnx_64 5222R10C.bin /P /R /N /X /R /K
+root@updatetool:/home/update/bbu/5222#   /root/afulnx_64 5222R10C.bin /P /B /N /X /R /K
 +---------------------------------------------------------------------------+
 |                 AMI Firmware Update Utility v5.16.01.0109                 |
 |      Copyright (c) 1985-2023, American Megatrends International LLC.      |
@@ -106,7 +100,7 @@ user    0m5.088s
 sys     1m8.161s
 ```
 
-我最後才要放 BMC CONSOLE (因為資訊很少)
+最後才要放 BMC CONSOLE (因為資訊很少)
 如果失敗的話
 ```bash
 ~ # CMD BIOS update: on progress
@@ -114,7 +108,7 @@ update_timeout_sec = 600
 BIOS update timeout
 BIOS update timeout
 ```
-不過也是從**BMC console** 我才知道原來他有 設定time
+不過也是從**BMC console** 知道設定time
 ![](./pic/bios_update_failed_by_afulnx_result.png)
 然後當 `BIOS update timeout`
 同時 我測試的5222
@@ -129,5 +123,38 @@ BIOS update timeout
 當然這個軟刷的中斷
 可以再使用 `afulnx_64`
 
-reflash !!!
-這不像WEBUI介面 爆炸 就全部爆炸了....
+-------------------------------------------------------------------------------
+
+# result #
+| Barracuda LED event          | Power on LED  | UID LED       | Inform ation LED | Notice            |
+|:-----------------------------|:-------------:|:-------------:|:----------------:|:-----------------:|
+| BIOS firmware update failed  | always light  | Blinking      | Blinking         | TEST(10min later) |
+| ==                           | ==            | ==            | ==               | ==                |
+| BIOS firmware update failed  |               | Blinking@10Hz | Blinking@10Hz    | john doc          |
+|                              |               |               |                  |                   |
+| BIOS firmware update execut  | Blinking0.5Hz | Blinking0.5Hz |                  | TEST              |
+| BIOS firmware update success | Light         | Blinking      |                  | TEST              |
+
+## expand - restart ##
+when bios failed --> restart --> BIOS is already borken, => it cannot be opened.
+```BIOS
+#### in BIOS screen
+Version : 52222R10C Date: 05/24/2024"
+Intel RC Version: 30.P19
+ CPU Info : Intel(R) Xeon(R) Silver 4314CPU @ 2.40GHz
+    Processors : 2 Cores: 32 Stepping: ICX M1
+Memory Info : Memory Size:128GB Memory Speed: 2666MT/s RAS Mode: Indep
+
+-------------------------------------------------------------------------------
+System Boot Status
+
+0x31 : Memory Initialization Complete
+0xF0 : Recovery -By Firwmare.
+0x4F : DEX IPL Start
+0xF2 : Recovery Started.
+0xF9 : Recovery Capsule Not Found.
+0x4F : DEX IPL Start
+0xF2 : Recovery Started.
+0xF9 : Recovery Capsule Not Found.
+```
+>  所以只要是flash broken --> 就會對應到相對的行為

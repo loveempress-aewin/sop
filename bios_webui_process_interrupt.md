@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 created	:	Mon Jul  1 16:22:28 CST 2024
-date	:	.
+date	:	Tue Jul  2 16:59:30 CST 2024
 
 -------------------------------------------------------------------------------
 #  bios WEBUI process intentional human interrupt  #
@@ -56,7 +56,7 @@ progressing
 [1577 : 2456 INFO]Bios START update done FlashOffset 0: SizeToWrite 33554432
 
 ```
-他會卡在 這裡 然後
+卡在 這裡
 我等了 15 分鐘 他還是 卡死的狀態
 (硬體燈號 維持著 執行燈號)
 但是卻一點動作都沒有
@@ -65,7 +65,16 @@ progressing
 這時候 只有一種解法
 就是用 燒入器 直接 重新燒
 
+
 WEB 直接卡死
 
 ![](./pic/biso_webui_precess_interrupt_0.png)
 ![](./pic/biso_webui_precess_interrupt_1.png)
+
+# result #
+| Barracuda LED Event         | Power on LED | UID LED      | Information LED | Notice |
+|:---------------------------:|:------------:|:------------:|:---------------:|:------:|
+| bios WEBUI upload interrupt | Bliking@2.z  | Blinking@2Hz |                 | TEST   |
+| bios WEBUI proces interrupt | Bliking@2Hz  | Blinking@2Hz |                 | TEST   |
+|                             |              |              |                 |        |
+| bios WEBUI success          | Light        |              |                 | TEST   |

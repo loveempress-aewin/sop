@@ -48,6 +48,9 @@ File system /
 /oldroot/root #
 ```
 now is first step
+
+####  I test --> time ####
+
 25%  --> 03:48
 50%  --> 07:18
 75%  --> 10:47
@@ -229,8 +232,22 @@ Enter your Option : Y
 Warning: Device is already in Firmware Update Mode...
 ```
 
+##  if bmc crash--> verify use bmc console ##
+```
+##### bmc console
+AMI000D48569B95 login: sysadmin
+login[2242]: PAM _pam_init_handlers: no default config other
+login[2242]: PAM error reading PAM configuration file
+login[2242]: PAM pam_start: failed to initialize handlers
+login[2242]: pam_start call failed: Critical error - immediate abort (26)
+```
+
 # result #
-| barracuda LED event        | power on LED | UID LED       | Inform action LED | LAN LED *2             | SEL                   | Notice             |
-|:--------------------------:|:------------:|:-------------:|:-----------------:|:----------------------:|:---------------------:|:------------------:|
-| BMC firmware update failed |              | Blinking@10Hz | Blinking@10Hz     |                        | v                     | BMC yafu interrupt |
-| BMC firmware update failed | blinking     | Blinking      |                   | Blinking (not regular) | Blinking(not regular) | resutl             |
+| barracuda LED event         | power on LED | UID LED       | Inform action LED | Notice   |
+|:---------------------------:|:------------:|:-------------:|:-----------------:|:--------:|
+| BMC firmware update failed  | blinking     | Blinking      |                   | TEST     |
+|-----------------------------|--------------|---------------|-------------------|----------|
+| BMC firmware update failed  |              | Blinking@10Hz | Blinking@10Hz     | JOHN DOC |
+|-----------------------------|--------------|---------------|-------------------|----------|
+| BMC firmware update execute | blinking@2Hz | Blinking@2Hz  |                   | TEST     |
+| BMC firmware update success | Light        |               |                   | TEST     |
