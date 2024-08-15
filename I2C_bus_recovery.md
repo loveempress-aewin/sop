@@ -27,7 +27,7 @@ BMC 會釋放 **reset 波形的信號**
 
 ## equipment ##
 1. ATX :  big power (我們通常有兩種 power)
-2. 有一個線是 杜邦線 的接線 (brian's al dupont lines)
+2. 有一個線是 杜邦線 的接線 (brian's alburt dupont lines)
 3. OT004   破壞設備
 ![3](./pic/I2C_bus_recovery_de.jpg)
 
