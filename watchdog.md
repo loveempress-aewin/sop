@@ -86,7 +86,7 @@ ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE
                                                ├──────────────────────────┐
                                                │Timeout action:           │
                                                │0x00:no action            │
-                                               │0x01 : system hard reset  │
+                                               │0x01 : system hard reset  │ (warm boot)
                                                │0x02 : system power off   │
                                                │0x03 : system power cycle │
                                                └──────────────────────────┘
@@ -142,3 +142,5 @@ this is my auto script 10seconds
 
 `ipmitool raw 0x06 0x24 0x04 0x01 0x01 0x10 0xc8 0x00`
 expand --> 20 secs
+
+`ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0xc8 0x00`

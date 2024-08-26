@@ -1,6 +1,6 @@
 ---
 created	:	Thu Apr 25 14:59:56 CST 2024
-date	:	Mon Aug  5 15:40:14 CST 2024
+date	:	Mon Aug 26 09:39:23 CST 2024
 
 ---
 # metadata
@@ -15,14 +15,35 @@ date	:	Mon Aug  5 15:40:14 CST 2024
 
 > 但是開啟後 他不會顯示甚麼東西 = = 甚至沒辦法看是不是開啟甚麼...
 
-`ipmtool raw 0x0c 0x01 0x01 0xc2`
+`ipmitool raw 0x0c 0x01 0x01 0xc2`
 `ipmitool -I lanplus -H192.168.199.42 -Uadmin -P11111111 raw 0x0c 0x01 0x01 0xc2`
 > IP location -> 是要用 BMC的!!! (如果可以我在說明 BMC AND OS 是不同IP的概念 )
 >> 現在只要知道是不同的就好
 
-> `-H192.168.199.42` same `-H 192.168.199.42` 這是看 6102 allen 做的!!!它讓我知道 可以不用space!!
+> `-H192.168.199.42` same `-H 192.168.199.42` 這是看 6102 allen Cheng 做的!!!它讓我知道 可以不用space!!
 
 然後 開啟後 才是重點PART
+
+##  use mac address ##
+mac address
++ step 1:
+`ipmitool raw 0x0c 0x01 0x01 0xc2` (open the BMC mac address triger)
++ step 2:
+```
+ipmitool raw 0x0c 0x01 0x01 0x05 0xaa 0xbb 0xcc 0xdd 0xee 0xff
+ipmitool raw 0x0c 0x01 0x01 0x05 0x00 0x01 0x00 0x01 0x00 0x01
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│  ipmitool   raw   0x0c   0x01   0x01   0x05   0xaa               0xbb   0xcc   0xdd   0xee   0xff│
+└────────────────────────────────────────────┼──────────────────┼──────────────────────────────────┘
+                                             │ 只有這裡要       │
+                                             │ 需要特定偶數     │
+                                             │ 0x00 0x02 0x04.. │
+                                             └──────────────────┘
+
+```
+
+-------------------------------------------------------------------------------
 
 #### error ####
 + error 1
