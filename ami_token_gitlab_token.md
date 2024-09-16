@@ -39,3 +39,17 @@ date	:	Mon Sep 16 09:14:46 CST 2024
 > 得到後就把那串存起來
 > 不然未來就看不到了喔
 >> 請看 (0x0101)
+
+##  put token in bashrc ##
+再來就是把這個token put bash的 環境變數
+`gedit ~/.bashrc`
+```bash				================start================
+## name
+export git_user=<git_user_name>
+#### 這是我們自己的 gitlab
+export ae_git_token=<ae_git_token>
+#### git.ami.com 的token (這裡是 上面的例子 )
+export ami_us_git_token="97LCjErsSKGysBphUU4z"
+#### TW!!!!
+export ami_tw_git_token=<ami_tw_git_token>
+```
