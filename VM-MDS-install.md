@@ -1,12 +1,13 @@
 -------------------------------------------------------------------------------
 created	:	Fri Sep 13 08:54:12 CST 2024
+
 date	:	.
+
 
 -------------------------------------------------------------------------------
 
 # metadata #
-[[git]]
-[[MDS]]
+[[git]] [[MDS]] [[vm]]
 [ref-MDS13.1](http://sd20-server.aewin.com:3000/pncIlBpCQrGJpcJxyQ-MAQ?view#Install-MDS-Tool)
 [ref-MDS13.5](http://sd20-server.aewin.com:3000/v2TZwIWbQfuphqjsxzg-pQ#GIT-SPX-plugin-installation)
 
@@ -34,8 +35,15 @@ MDS-TOOL 需要下載兩個version (就像 pythong ==)
 + 13.5
 
 ## MDSTOOL 13.1 install ##
-首先我們放置的位置 `/mnt/AEWIN/MDS_TOOL/v13.1`
+首先我們放置的位置 `/mnt/AEWIN/projects/MDS_TOOL_install`
 (這裡是筆者的用法)
+```bash				================start================================================================
+## the structure  /mnt/AEWIN/projects/MDS_TOOL_install
+#### ./MDS_TOOL_install/
+#### ├── 13.1
+#### └── 13.5
+```
+
 
 ```bash				================start================================================================
 git clone https://git_user:$ami_us_git_token@git.ami.com/tools/mds/releases/13.5.git
@@ -150,24 +158,28 @@ git clone https://git_user:$ami_us_git_token@git.ami.com/tools/mds/releases/13.5
 
 > 需要把 ./13.5/Linux/x86_64/install.sh    ----->變執行檔
 
+>> 只有13.5的需要改變他的執行權限
+
 如果你去執行不是執行檔
 ~~就像那些有緣無份的故事~~
 `sudo chmod 777 ./Linux/mds-13.5-deb-x86_64.run`
 `sudo chomod 777 ./Linux/x86_64/install.sh`
 ```bash	.		================start===============
 -rw-r--r-- 1 root root 238456479 Sep 13 10:48 mds-13.5-deb-x86_64.run
-  | |
-  | |
-\\   //
- \\ //
-  \v/
+####  | |
+####  | |
+####\\   //
+#### \\ //
+####  \v/
 -rwxrwxrwx 1 root root 238456479 Sep 13 10:48 mds-13.5-deb-x86_64.run
 
 -rw-r--r-- 1 root root   19235 Sep 13 10:49 install.sh
-
+####  |
+####  |
+####  V
 -rwxrwxrwx 1 root root   19235 Sep 13 10:49 install.sh
 ```
-![pic:the-diff](./pic/VM_MDS_install.png)
+
 
 ```bash	.		================start================
 ./Linux/mds-13.5-deb-x86_64.run
@@ -245,4 +257,41 @@ git clone https://git_user:$ami_us_git_token@git.ami.com/tools/mds/releases/13.5
 ##
 ##To launch MDS use: sudo MDS -clean
 ```
+這裡就是安裝完成
+
+##  config_MDS ##
+[config_MDS_by_malo](http://sd20-server.aewin.com:3000/pncIlBpCQrGJpcJxyQ-MAQ?view#%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D)
++ {your path}/MDS/spx/spxconfs.xml
++ {your path}/MDS/spx/utils/Group.dsc
++ add LICENSE.AEWIN (LICENSE.AEWIN in )
+
+
+##  再來是要給他們一個位置!!   ##
+這裡是經過 malo 的 經驗 與教法
+```bash				================start================
+/mnt/AEWIN/project/1937_MDSTOOL/
+
+## 1937_MDSTOOL/
+## ├── Development
+## └── Workspace
+```
+因為後續要執行 MDS
+> MDS 檔案 當我上面安裝好後
+> 都會放在 MDS/
+
+筆者這裡MDS 的位置是
++ 13.1
+`/mnt/AEWIN/MDS_TOOL_install/13.1/MDS/MDS`
++ 13.5
+`/mnt/AEWIN/MDS_TOOL_install/13.5/MDS/MDS`
+
+> 記得我是用 外掛的方式 MDS TOOL 但放在 /mnt/AEWIN/MDS_TOOL/
+
+看是那一個version 就在哪一個folder下喔
+
+> 在執行前 記得權限是 root
+
+`./MDS -clean`
+
+> 筆者用的是虛擬機器連結到虛擬機 (所以如果用這個指令 具需要直接在 VM的虛擬機)
 

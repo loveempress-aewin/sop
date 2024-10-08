@@ -3,7 +3,7 @@ created	:	Thu Sep 19 14:42:25 CST 2024
 date	:	.
 
 -------------------------------------------------------------------------------
-# sd20  #
+# sd20-dns-error  #
 [ref](https://blog.csdn.net/Unknownfuture/article/details/104642043)
 
 我用firefox  look DEV-tool
@@ -29,15 +29,15 @@ remote: Enumerating objects: 2268, done.
 remote: Counting objects: 100% (2268/2268), done.
 remote: Compressing objects: 100% (1536/1536), done.
 remote: Total 12168 (delta 739), reused 2141 (delta 618), pack-reused 9900                                                                                                                  Receiving objects: 100% (12168/12168), 243.46 MiB | 21.08 MiB/s, done.                                                                                                                      Resolving deltas: 100% (7147/7147), done.
-Submodule 'packages/ast2600' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/ast2600) registered for path 'packages/ast2600'
-Submodule 'packages/bootloader' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/bootloader) registered for path 'packages/bootloader'
-Submodule 'packages/common' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/common) registered for path 'packages/common'
-Submodule 'packages/kernel' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/kernel) registered for path 'packages/kernel'
-Submodule 'packages/redfish-ast2600' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/ext-packs/technologypack/redfish/redfish-ast2600.git) registered for path 'packages/redfish-ast2600'
-Submodule 'packages/target' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/target) registered for path 'packages/target'
-Submodule 'packages/utilities/packages/vmcli' (http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/utilities/vmcli) registered for path 'packages/utilities/packages/vmcli'                                                                                                                                                                                      Cloning into '/mnt/AEWIN/codebase/ast2600evb/archercity/packages/ast2600'...
-fatal: unable to access 'http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/ast2600/': Could not resolve host: sd20-server.aewin.com
-fatal: clone of 'http://git_user:yDTvwx8kvymWQXVEH6mw@sd20-server.aewin.com/core/lts/spx-13/core/ast2600' into submodule path '/mnt/AEWIN/codebase/ast2600evb/archercity/packages/ast2600' failed
+Submodule 'packages/ast2600' (http://git_user:yDTvwx:8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/core/ast2600) registered for path 'packages/ast2600'
+Submodule 'packages/bootloader' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/core/bootloader) registered for path 'packages/bootloader'
+Submodule 'packages/common' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/core/common) registered for path 'packages/common'
+Submodule 'packages/kernel' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/core/kernel) registered for path 'packages/kernel'
+Submodule 'packages/redfish-ast2600' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/ext-packs/technologypack/redfish/redfish-ast2600.git) registered for path 'packages/redfish-ast2600'
+Submodule 'packages/target' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/core/target) registered for path 'packages/target'
+Submodule 'packages/utilities/packages/vmcli' (http://git_user:yDTvwx8kvymWQXVEH6@sd20-server.aewin.com/core/lts/spx-13/utilities/vmcli) registered for path 'packages/utilities/packages/vmcli'                                                                                                                                                                                      Cloning into '/mnt/AEWIN/codebase/ast2600evb/archercity/packages/ast2600'...
+fatal: unable to access 'http://git_user:yDTvwx8kvymWQXVEH6m@sd20-server.aewin.com/core/lts/spx-13/core/ast2600/': Could not resolve host: sd20-server.aewin.com
+fatal: clone of 'http://git_user:yDTvwx8kvymWQXVEH6m@sd20-server.aewin.com/core/lts/spx-13/core/ast2600' into submodule path '/mnt/AEWIN/codebase/ast2600evb/archercity/packages/ast2600' failed
 Failed to clone 'packages/ast2600'. Retry scheduled
 ```
 我直擷取部分

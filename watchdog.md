@@ -1,12 +1,12 @@
 ---
 created	:	Wed Apr 24 11:42:47 CST 2024
+
 date	:	Fri Aug  9 10:34:30 CST 2024
 
 ---
 # metadata
 [ref](https://hackmd.io/UMjW7yJqTm-_Yba-f6JhXQ)
-[[bbu]]
-[[watchdog]]
+[[bbu]] [[watchdog]] [[bmc]]
 
 ---
 # watchdog
@@ -48,53 +48,6 @@ close the watchdog
 
 在下command 之前 可以去看 他們做的
 `\\192.168.101.240\sd00軟體研發處\SD20SW二部\04_Project\IPMI\01_Aewin IPMI command list`
-
-```
-ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE
-                        |
-                        Time use: set role
-                        0x01:BIOS FRB2
-                        0x02:BIOS/POST
-                        0x03:OS Load
-                        0x04:SMS/OS
-                        0x05:OEM
-
-                             |
-                             Timeout action:
-                             0x00 : no action
-                             0x01 : system hard reset
-                             0x02 : system power off
-                             0x03 : system power cycle
-
-                                   |
-                                   Timer Use Expiration flag clear :
-                                   (通常 Time use[0xAA] 設定甚麼 這個就是甚麼 ...)
-
-```
-```
-                         ┌──────────────────────┐        ┌────────────────────────────────┐
-                         │Time use: set role    │        │Time Use Expiration flag clear  │
-                         │0x01:BIOS FRB2        │        │0x02: BIOS FRB2                 │
-                         │0x02:BIOS/POST        │        │0x04: BIOS/POST                 │
-                         │0x03:OS Load          │        │0x08: OS Load                   │
-                         │0x04:SMS/OS           │        │0x10: SMS/OS                    │
-                         │0x05:OEM              │        │0x20: OEM                       │
-                         ├──────────────────────┘        ├────────────────────────────────┘
-                         │                               │
- ipmitool raw 0x06 0x24  0xAA                  0xZZ 0x01 0xQQ 0xDD 0xEE
-                                               │
-                                               ├──────────────────────────┐
-                                               │Timeout action:           │
-                                               │0x00:no action            │
-                                               │0x01 : system hard reset  │ (warm boot)
-                                               │0x02 : system power off   │
-                                               │0x03 : system power cycle │
-                                               └──────────────────────────┘
-
-├── power_S5.md
-├─ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE
-```
-
 
 + 0xAA : Time use
   + 0x01: BIOS FRB2
@@ -144,3 +97,33 @@ this is my auto script 10seconds
 expand --> 20 secs
 
 `ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0xc8 0x00`
+
+```bash			================start================
+#                          ┌──────────────────────┐        ┌────────────────────────────────┐
+#                          │Time use: set role    │        │Time Use Expiration flag clear  │
+#                          │0x01:BIOS FRB2        │        │0x02: BIOS FRB2                 │
+#                          │0x02:BIOS/POST        │        │0x04: BIOS/POST                 │
+#                          │0x03:OS Load          │        │0x08: OS Load                   │
+#                          │0x04:SMS/OS           │        │0x10: SMS/OS                    │
+#                          │0x05:OEM              │        │0x20: OEM                       │
+#                          ├──────────────────────┘        ├────────────────────────────────┘
+#                          │                               │
+#  ipmitool raw 0x06 0x24  0xAA                  0xZZ 0x01 0xQQ 0xDD 0xEE
+#                                                │
+#                                                ├──────────────────────────┐
+#                                                │Timeout action:           │
+#                                                │0x00:no action            │
+#                                                │0x01 : system hard reset  │ (warm boot)
+#                                                │0x02 : system power off   │
+#                                                │0x03 : system power cycle │
+#                                                └──────────────────────────┘
+#
+# ├── power_S5.md
+# ├─ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE
+```
+```bash			================start================
+ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0x64 0x00
+    ### 10s
+ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0x1e 0x00
+    ### 3s
+```

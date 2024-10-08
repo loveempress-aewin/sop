@@ -1,7 +1,12 @@
 -------------------------------------------------------------------------------
 created	:	Fri Aug  2 16:05:24 CST 2024
-date	:	.
+
+date	:	Fri Aug 30 10:58:08 CST 2024
+
 expand : UR BMC network CSM  ##TODO
+[[bmc]]
+[[ipmitool]]
+
 
 -------------------------------------------------------------------------------
 
@@ -30,9 +35,30 @@ OS| command                                              | tag                | 
 | ipmitool sensor thresh "CPU0 Temp." upper 40 50 60   |                    |                            |
 |                                                      |                    |                            |
 | ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE | watchdog           |                            |
+| ipmitool mc watchdog get                             | watchdog           |                            |
+| ipmitool mc watchdog reset                           | watchdog           |                            |
 |                                                      |                    |                            |
 | ipmitool raw 0x0c 0x01 0x01 0xc2                     | mac address        |                            |
 | ipmitool raw 0x0c 0x01 0x01 0x05 (0x__)*6            | mac address        |                            |
+|                                                      |                    |                            |
+| ipmitool lan print 1                                 | ip                 |                            |
+| ipmitool lan set 1 ipsrc dhcp                        | ip                 |                            |
+| ipmitool lan set 1 arp respond on                    | ip                 |                            |
+|                                                      |                    |                            |
+| ipmitool chassis status                              |                    |                            |
+|                                                      |                    |                            |
+| ipmitool mc getenables                               |                    |                            |
+|                                                      |                    |                            |
+| ipmitool event 1/2/3                                 |                    |                            |
+|                                                      |                    |                            |
+| ipmitool sdr info                                    |                    |                            |
+|                                                      |                    |                            |
+| ipmitool sel elist -v                                |                    |                            |
+| ipmitool sel elist -vv                               |                    |                            |
+| ipmitool sel elist -vvvvv                            |                    |                            |
+|                                                      |                    |                            |
+| ipmitool chassis status                              |                    |                            |
+| ipmitool chassis policy always-off                   |                    |                            |
 
 -------------------------------------------------------------------------------
 ## change_password ##
@@ -95,5 +121,94 @@ ipmitool raw 0x0c 0x01 0x01 0x05 0x00 0x01 0x00 0x01 0x00 0x01
                                              │ 需要特定偶數     │
                                              │ 0x00 0x02 0x04.. │
                                              └──────────────────┘
+```
+
+##   BMC ip    ##
+[set IPMI use DHCP](https://svennd.be/set-ipmi-to-use-dhcp/#:~:text=If%20you%20installed%20ipmitools%2C%20you%20can%20change%20the,DHCP%20%3A%20ipmitool%20lan%20set%201%20ipsrc%20dhcp)
+If you installed ipmitools, you can change the IP address source from static to DHCP or otherwise.
+
+Check what is now setup :
+`ipmitool lan print`
+another command
+```
+ipmitool lan set 1 ipsrc [ static | dhcp ]
+ipmitool lan set 1 ipaddr {YOUR DESIRED IP}
+ipmitool lan set 1 netmask {YOUR NETMASK}
+ipmitool lan set 1 defgw ipaddr 10.0.1.1
+```
+
+##  event ##
+| ID | descript                                       | log |
+|:--:|:----------------------------------------------:|:---:|
+| 1  | Temperature-Upper Critical - Going High        |     |
+| 2  | Voltage Threshold - Lower Critical - Going Low |     |
+| 3  | Memory - Correctable ECC                       |     |
+
+##  lan print  ##
+[some_term](https://cloud.tencent.com/developer/article/2375158)
+                            + LAN connect    |
++--------------+ session    +                |
+| channel type |            + serial connect |
++--------------+ no session - system connect |
+                            + IPMI connect   |
+
+###  exec from file  ###
+batch (no confident)
+```
+#cat commandlist
+session info all	#print seesin info
+sdr info			# print sdr info
+sdr type fan		# print fan speed
+```
+`ipmitool -H <ip> -U <username> -P <password> exec commandlist`
 
 ```
+ipmitool sel elist -v
+ipmitool sel elist -vv
+ipmitool sel elist -vvv
+ipmitool sel elist -vvvv
+ipmitool sel elist -vvvvv
+```
+
+##  power_policy  ##
+[ref-power-policy](https://blog.csdn.net/weixin_49423593/article/details/130520656)
+power policy 就是 他會關機後 看如何執行動作
+`ipmitool chassis status`
+```
+################====output====>
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : previous
+Last Power Event     : ac-failed
+Chassis Intrusion    : inactive
+Front-Panel Lockout  : inactive
+Drive Fault          : false
+Cooling/Fan Fault    : true
+Sleep Button Disable : allowed
+Diag Button Disable  : allowed
+Reset Button Disable : allowed
+Power Button Disable : allowed
+Sleep Button Disabled: false
+Diag Button Disabled : false
+Reset Button Disabled: false
+Power Button Disabled: false
+```
+這裡看到的會是 `previous`
+如果我們關機 他就會關機 就需要 power button
+但如果我們變動他
+`ipmitool chassis policy always-on`
+```
+ipmitool chassis status
+####====output====>
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-on
+```
+
+

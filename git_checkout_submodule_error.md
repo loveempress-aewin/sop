@@ -1,6 +1,8 @@
 -------------------------------------------------------------------------------
-created	:	Fri Sep 27 08:36:12 CST 2024
-date	:	.
+created	:   Fri Sep 27 08:36:12 CST 2024
+
+date	:   Tue Oct  8 15:50:47 CST 2024
+[[git]] [[submodule]] [[error]]
 
 -------------------------------------------------------------------------------
 
@@ -61,3 +63,12 @@ root@bmc-VirtualBox:/mnt/AEWIN/codebase/ast2500evb/ast2500evb#  git submodule up
 ## Submodule path 'packages/utilities/packages/vmcli': checked out 'e4b9bc5828532f759a7b3e03314b5906d0f53088'
 ## Submodule path 'packages/utilities/packages/yafuflash': checked out '7cb91cb716d0204bf57b1018add37560869e35e8'
 ```
+
+這裡的錯誤 原理是這樣的!!
+假設 在 我們的專案裡面
+前一個人在修改的時候
+有5各submodule 但是 他只修改了其中一個
+可能就是這時候出問題
+會讓下一個我們抓sub
+在 `git status` 不是乾淨的 --by malo
+
