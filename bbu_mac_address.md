@@ -1,10 +1,8 @@
 ---
 created	:	Thu Apr 25 14:59:56 CST 2024
-date	:	Mon Aug 26 09:39:23 CST 2024
 
----
-# metadata
-
+date	:	Tue Oct  8 16:30:57 CST 2024
+[[bbu]] [[bmc]] [[ipmitool]]
 
 ---
 # mac_address.md

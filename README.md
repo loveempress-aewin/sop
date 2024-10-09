@@ -8,9 +8,45 @@ date	:	Fri Aug  2 16:52:38 CST 2024
 這是程式女王的小小筆記
 如果喜歡 請案讚 分享
 
+- 如果有問題 請給我發個訊息
+
+# my_flow #
+通常筆者都是用OBS 來開啟
+如果你想看所有的部分
+
+## interface introduce  ##
+![interface](./pic/readme_interface.png)
+```bash			================start================
+####  if ur network slow can look it fast
+#### ┌──────┐   ┌─────────┐   ┌────────────┐
+#### │      │   │ article │   │ the order  │
+#### │ all  │   │ read    │   │ of         │
+#### │ file │   │ area    │   │ visualized │
+#### │      │   │         │   │ titles     │
+#### │      │   │         │   └────────────┘
+#### │      │   │         │   ┌────────────┐
+#### │      │   │         │   │ related    │
+#### │      │   │         │   │ files      │
+#### └──────┘   └─────────┘   └────────────┘
+```
+
+## Focus mods ##
+Simple, intuitive, and convenient folding of a paragraph
+![CF](./pic/readme_title.png)
+
+##  related file  ##
+This is a related concept that can be thought of as a database.
+Simply put, it allows you to quickly find the corresponding files
+![graph](./pic/readme.gif)
+
+###  example ###
+![do](./pic/readme_how_do.gif)
+
+# role #
 這裡都是從 各路大神的教導
 
 + John Chen
+  + 其陽神話
   + 超級BMC大神
   + 主管大大
   + 帥帥的 人很好 但是很怕麻煩
@@ -21,7 +57,6 @@ date	:	Fri Aug  2 16:52:38 CST 2024
   + EE涂的掌上明珠
   + 很機車 很好笑 BMC 大神
   + 黑 嘲諷又好笑
-  + 好像有點不爽軟2花瓶
 + malo chou 通
   + 掃描眼
   + bmc 大神
@@ -29,5 +64,3 @@ date	:	Fri Aug  2 16:52:38 CST 2024
   + 畫畫超好
   + 很機車...每次都會被笑死+氣死
   + 好人
-
-

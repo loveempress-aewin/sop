@@ -1,6 +1,9 @@
 ---
 created	: Thu Mar 28 11:06:42 CST 2024
+
 date	:	Thu Mar 28 11:07:40 CST 2024
+
+[[yafuflash]] [[bbu]] [[bmc]]
 
 ---
 # yafuflah birned BMC FW SOP

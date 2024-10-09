@@ -1,10 +1,10 @@
 ---
 created	:	Thu Jun 20 09:10:09 CST 2024
+
 date	:	.
 
----
+[[ipmitool]] [[os]] [[bbu]]
 
-# meatadata #
 [John\_ref](http://sd20-server.aewin.com:3000/s/HJqGnH6ap)
 [brian\_CIFSref](https://hackmd.io/@kZ_Gc4xdSXW-gxf45fbQUQ/HJ72NKw-R)
 

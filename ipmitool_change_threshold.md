@@ -1,6 +1,9 @@
 -------------------------------------------------------------------------------
 created	:	Wed Aug 14 11:18:41 CST 2024
+
 date	:	.
+
+[[bmc]] [[ipmitool]]
 
 -------------------------------------------------------------------------------
 [ipmitool sensor change](https://www.truenas.com/community/resources/how-to-change-ipmi-sensor-thresholds-using-ipmitool.35/)
