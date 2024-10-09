@@ -42,6 +42,16 @@ Simply put, it allows you to quickly find the corresponding files
 ###  example ###
 ![do](./pic/readme_how_do.gif)
 
+就像這影片 程式女王 可以看這篇文章
++ 右上:
+有清晰的標題 點選就跳轉
++ 右下:
+可以直接看到相關的文件
+
+~~這是 Wed Oct  9 09:32:45 CST 2024~~
+~~也是我在 +172800 seconds 就一年得筆記數量~~
+~~再來會越來越多但是我還是喜歡這樣的方式~~
+
 # role #
 這裡都是從 各路大神的教導
 
