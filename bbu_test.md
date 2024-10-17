@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 created	:	Mon Aug  5 11:39:43 CST 2024
+
 date	:	.
 
--------------------------------------------------------------------------------
-# metadata #
-[ref](\\192.168.101.240\sd00軟體研發處\SD20SW二部\05_技術文件與工具\02_IPMI\IPMI規範\BBU)
+<!-- [ref](\\192.168.101.240\sd00軟體研發處\SD20SW二部\05_技術文件與工具\02_IPMI\IPMI規範\BBU) -->
+
 [[bbu]]
 
 -------------------------------------------------------------------------------
@@ -64,8 +64,47 @@ COM1 COM2 我一起寫
 ##  Buzzer Function              ##
 ##  IPMITOOL                     ##
 這裡的測試就是用ipmitool tool
-可以使用 筆者是用 我自己寫的腳本 來讀取他的版本號
+
+可以使用 筆者是用 我自己寫的[腳本](http://sd20-server.aewin.com/Chin_Chiang/playwright/-/blob/auto/auto_parse_version.sh)
+來讀取他的版本號
+
 當然你們也可以用 `ipmitool sdr`
+
+```bash			================start================
+function_parse(){
+    update_file_name="";
+    number_1=$(echo "${catch_bmc_version}"|cut -c 2-4);						#int number_1
+    number_2=$(echo "${catch_bmc_version}"|cut -c 5-7);						#int number_2
+    number_3=$(echo "${catch_bmc_version}"|cut -c 8-9);                     #int third_number (declare)
+    number_4=$(echo "${catch_bmc_version}"|cut -c 11-13);                   #int number_4
+    ######int parse_1~4 hex => decimal
+    parse_1=$((16#${number_1})); parse_2=$((16#${number_2}));
+    parse_3=$((16#${number_3})); parse_4=$((16#${number_4}));
+    # echo "${parse_1}   ${parse_2}   ${parse_3}   ${parse_4}  ";  ## dev tr mode
+    parse_name=${parse_1}.${parse_2}.$((${parse_4}*100+${parse_3}));    #char *[] parse_name
+
+    printf " right now version : [${parse_name}]\n";
+    #need_version=${need_version} $(echo "${catch_version}"|cut -d ' ' -f 3);
+    #echo " out : ";
+    #echo "${need_version}";											#dev verification
+    #echo "${first_number}";											#dev verification
+    #echo "${second_number}";											#dev verification
+    #echo "${third_number}";											#dev verification
+    #echo "${forth_number}";											#dev verification
+    ###### exclude the same upload file with current bmc version
+    #change_file_limit=$(ls ./UPLOADFILES/ | grep -v "${parse_name}"|wc -l)
+    ####### fix bug if update file not only 1
+    #if [ ${change_file_limit} == 1 ]
+    #then
+    ##change_file=$(ls ./tests/uploadFiles/ | grep -v "${parse_name}");	#char *change_file
+    #change_file=$(ls ./UPLOADFILES/ | grep -v "${parse_name}");	#char *change_file
+    #else
+    ##echo -e "===================\n|!!!!!!ERROR!!!!! |\n| you file need   |\n|one is right now |\n|version!		   |";
+    #echo -e "==============================\n| One of your files needs to |\n| consisitent with your      |\n| current BMC version        |\n|                            |\n==============================\n| right now version is  :    |\n.      ${parse_name}         "; exit 520;
+    #fi
+}
+```
+
 ##  Sensor values are reasonable ##
 `ipmitool sdr`
 `ipmitool sensor`
