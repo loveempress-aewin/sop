@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 created	:	Tue Oct  8 10:39:07 CST 2024
 
-date	:	.
+date	:	Fri Oct 18 15:55:22 CST 2024
 
 [[project]]
 [[1946]]
@@ -159,7 +159,7 @@ def build_install():
 ![temperature100](./pic/project/proj_1946_100.png)
 此範例用 1946 CPU1 DIMMKK0 Temp 來示範 (記得 Temp <-> Temperature)
 + 1		:	就是物件 sensor
-+ AA	:   這裡的assertion mast : 0x4810 **0x4810 表示 只有1個 **
++ AA	:   這裡的assertion mast : 0x4810 **0x4810 表示 只有1個**
 ~~這需要去讀書 peter說的~~
 SPC 是PE大帝給我的 我copy 放在 `\\192.168.101.240\sd00軟體研發處\SD20SW二部\03_Personal\ChiangChiang\myself\role\SD20-peter\ipmi-second-gen-interface-spec-v2-rev1-1 1.pdf`
 + FF	:	Upper \*
