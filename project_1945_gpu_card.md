@@ -14,9 +14,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 因為這篇文章有很多 704L  所以筆者幫忙把架構用出來 好給後續看得筆者看
 # overview #
 
-┌───────┐
-│ 1945  │ (做法 功能)
-└───────┘
+┌───────┐<br>
+│ 1945  │ (做法 功能)<br>
+└───────┘<br>
 + [GPU─present─pin](#gpu─present─pin)
   + [hardware─GPU─present─pin](#hardware─GPU─present─pin)
   + [software─GPU─present─pin](#software─GPU─present─pin)
@@ -24,9 +24,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 + [power─sequence](#power─sequence)
   + [cold─boot─warm─boot](#cold─boot─warm─boot)
 
-┌───────┐
-│ issue │(問題)
-└───────┘
+┌───────┐ <br>
+│ issue │(問題) <br>
+└───────┘ <br>
 + [no─read─GPIO─pin](#no─read─GPIO─pin)
   + [solution─>no─read─GPIO─pin](#solution─>no─read─GPIO─pin)
 + [build─git─spx─no─space](#build─git─spx─no─space)
@@ -34,9 +34,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
   + [solution─>0000](#solution─>0000)
 + [issue─compile─no─pthread](#issue─compile─no─pthread)
 
-┌───────┐
-│ other │(不是上面那些都是這裡)
-└───────┘
+┌───────┐ <br>
+│ other │(不是上面那些都是這裡) <br>
+└───────┘ <br>
 
 -------------------------------------------------------------------------------
 
