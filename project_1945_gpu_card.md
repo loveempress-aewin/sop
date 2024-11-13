@@ -1,9 +1,7 @@
 -------------------------------------------------------------------------------
 created	:	Mon Oct 14 21:22:07 CST 2024
 
-created	:	Tue Oct 15 17:49:38 CST 2024
-
-date	:	Tue Nov 12 10:46:25 CST 2024
+date	:	Wed Nov 13 14:04:27 CST 2024
 
 [[project]]
 [[1945]]
@@ -14,9 +12,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 因為這篇文章有很多 704L  所以筆者幫忙把架構用出來 好給後續看得筆者看
 # overview #
 
-┌───────┐<br>
-│ 1945  │ (做法 功能)<br>
-└───────┘<br>
+┌───────┐				<br>
+│ 1945  │ (做法 功能)	<br>
+└───────┘				<br>
 + [GPU─present─pin](#gpu─present─pin)
   + [hardware─GPU─present─pin](#hardware─GPU─present─pin)
   + [software─GPU─present─pin](#software─GPU─present─pin)
@@ -24,9 +22,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 + [power─sequence](#power─sequence)
   + [cold─boot─warm─boot](#cold─boot─warm─boot)
 
-┌───────┐ <br>
-│ issue │(問題) <br>
-└───────┘ <br>
+┌───────┐				<br>
+│ issue │(問題) 		<br>
+└───────┘ 				<br>
 + [no─read─GPIO─pin](#no─read─GPIO─pin)
   + [solution─>no─read─GPIO─pin](#solution─>no─read─GPIO─pin)
 + [build─git─spx─no─space](#build─git─spx─no─space)
@@ -34,9 +32,9 @@ date	:	Tue Nov 12 10:46:25 CST 2024
   + [solution─>0000](#solution─>0000)
 + [issue─compile─no─pthread](#issue─compile─no─pthread)
 
-┌───────┐ <br>
+┌───────┐ 						<br>
 │ other │(不是上面那些都是這裡) <br>
-└───────┘ <br>
+└───────┘ 						<br>
 
 -------------------------------------------------------------------------------
 
@@ -96,7 +94,7 @@ ret = gpio_read_data(GPU_0_PRESENT_PIN, &data);
 + `GPU_info[0] -> 1` -> no device
 
 # bmc-5-core #
-[bmc-5-core](./bmc_5_core_signal.md)
+[bmc-5-core](#bmc_5_core_signal.md)
 BMC 的  5本教
 1. S5
 2. S3
@@ -151,7 +149,7 @@ uint8_t psu_powerok(uint8_t index){}
 > 有`intel` `AMD` 可能有相同 可能不同
 > + inter	-> PLTRST
 > + AMD		-> LPCreset
-> 此1945 是AMD        --EE albert
+> 此1945 是AMD        -- brian恩碩的夢 EE albert
 
 後來PE大帝又說 1945 可以寫在
 `/packages/libipmipdk-ARM-AST2600-AST2600EVB-AMI-src/data/PDKHooks.c`
