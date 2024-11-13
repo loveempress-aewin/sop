@@ -11,6 +11,34 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 [[C-uint8_t]]
 
 -------------------------------------------------------------------------------
+因為這篇文章有很多 704L  所以筆者幫忙把架構用出來 好給後續看得筆者看
+# overview #
+
+┌───────┐
+│ 1945  │ (做法 功能)
+└───────┘
++ [GPU─present─pin](#gpu─present─pin)
+  + [hardware─GPU─present─pin](#hardware─GPU─present─pin)
+  + [software─GPU─present─pin](#software─GPU─present─pin)
++ [bmc─5─core](#bmc─5─core)
++ [power─sequence](#power─sequence)
+  + [cold─boot─warm─boot](#cold─boot─warm─boot)
+
+┌───────┐
+│ issue │(問題)
+└───────┘
++ [no─read─GPIO─pin](#no─read─GPIO─pin)
+  + [solution─>no─read─GPIO─pin](#solution─>no─read─GPIO─pin)
++ [build─git─spx─no─space](#build─git─spx─no─space)
++ [do─while─no─limit─loop─0000](#do─while─no─limit─loop─0000)
+  + [solution─>0000](#solution─>0000)
++ [issue─compile─no─pthread](#issue─compile─no─pthread)
+
+┌───────┐
+│ other │(不是上面那些都是這裡)
+└───────┘
+
+-------------------------------------------------------------------------------
 
 # 1945-gpu-card #
 此專案 是1945 目標
@@ -22,7 +50,16 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 
 [ref-mp4- 00:40:15] `\\192.168.101.240\sd00軟體研發處\SD20SW二部\03_Personal\ChiangChiang\project\1945\1945_gpu_temperature\2024-10-04 Malo_GPU Fan 講解.mkv`
 
-## hardware-GPU-present-pin ##
+summary : future
+1. read gpu present pin	-> check have gpu card
+2. read gpu temperature	-> feature
+3. cold||warm boot need to read gpu card
+
+
+
+## GPU-present-pin ##
+### hardware-GPU-present-pin ###
+
 示波器
 
 + 波high	-> no device
@@ -35,24 +72,98 @@ date	:	Tue Nov 12 10:46:25 CST 2024
 `ret` => 全部都是 function return
 所以 `ret == 0 ` ==>  GPU_present
 
+### software-GPU-present-pin ###
+`/mnt/AEWIN/codebase/malo/ast2600evb/packages/common/packages/libAEWIN-src/data/device/fan_closeloop.c`
+在這file 裡面 會一直 loop
+```C			================start================
+void gpu_card_present(void){
+    //gpio_read_data(GPU_0_PRESENT_PIN, &data);			// Reading GPU0 is pluged or not
+	//GPU_info[0].present = data;
+	//gpio_read_data(GPU_1_PRESENT_PIN, &data);			// Reading GPU1 is pluged or not
+	//GPU_info[1].present = data;
+}
+
+
+ret = gpio_read_data(GPU_0_PRESENT_PIN, &data);
+```
+
+這裡是一開始 至於註解代表著沒有使用
+可以看後面遇到的問題[no-read-GPIO-pin](#no-read-GPIO-pin)
+
+如果有設備 是可以讀取到
+(if have device)
++ `GPU_info[0] -> 0` -> have device
++ `GPU_info[0] -> 1` -> no device
+
+# bmc-5-core #
+[bmc-5-core](./bmc_5_core_signal.md)
+BMC 的  5本教
+1. S5
+2. S3
+3. PSON
+4. Powerok
+5. platform rst
+
+> 雖然BMC 看 `S5` `S3` `powerOK` `platform rst` 就好
+
+> 但是 `PSON` 就是人類直觀判斷 -> 緊接風散
+
+> 所以筆者就把他們暫定為 bmc 5核心重要電訊號
+
+#  power-sequence #
+![power sequence](./pic/1945/p_1945_gpu_power_sequence.png)
+此張圖只是示意圖 不代表都是 low -> high
 
 
 ## cold-boot-warm-boot  ##
-####TODO
++ warm-boot :
+  + platform rst
 
++ cold-boot :
+  + S3
+  + powerOK
+  + platform rst
 
+goal : 要在 `warm boot` && `cold boot`
+在讀取一次 gpu card (這個正常情況下不會發生)
+> 因為 PCI介面 不能熱插拔
 
-#### peter-excel-command-spc-not-well ####
+這個我也是被這個搞死....
+要先記得 `power sequence`
 
-`/packages/common/packages/ipmi_dev-src/data/IPMI_AewinPrivateCmd.h`
-`AEWINIfcRWReq_T`
+一開始問peter 大帝 他說可以看 powerOK
+`package/common/packages/libAEWIN-src/data/device/psu.c`
+```C			================start================
+uint8_t psu_powerok(uint8_t index){}
+```
 
-`/packages/common/packages/libAEWIN-src/data/Include/AewinPrivateCmd.h`
-`./common/packages/libAEWIN-src/data/ipmi_cmd/aewin_cmdselect.c`
-`/packages/common/packages/libAEWIN-src/data/ipmi_cmd/aewin_cmdselect.c`
-`CMD_AEWIN_BIOS_POST_END`
+藉由上面的例子
+我們只要detect `platform rst`
+就可以完成.... 但是
 
-## mutilpel-define-error ##
+理想很美滿
+現實很骨感
+
+[1945-power-cycle-warm-boot]
+這裡是問[前人的](#power-cycle-and-warm-boot)
+
+然後不同的 CPU 會有不同的電訊號
+> 有`intel` `AMD` 可能有相同 可能不同
+> + inter	-> PLTRST
+> + AMD		-> LPCreset
+> 此1945 是AMD        --EE albert
+
+後來PE大帝又說 1945 可以寫在
+`/packages/libipmipdk-ARM-AST2600-AST2600EVB-AMI-src/data/PDKHooks.c`
+```C			================start================
+void PDK_LPCReset (int BMCInst)
+{
+    gpu_card_presetn();
+}
+```
+因為是AMD 的平台同時
+他只要一個 訊號就可以看出來
+他有 `cold boot` && `warm boot`
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -262,8 +373,7 @@ if(fan_closeloop_gpu_get_count > 9)
 
 -------------------------------------------------------------------------------
 
-## error-build-git-spx ##
-
+## error-build-git-spx-grunt ##
 ```bash			================start================
 Fatal error: Unable to find local grunt.
 
@@ -277,9 +387,13 @@ https://gruntjs.com/getting-started
 Unable to build the tree with the given PRJ and packages directory
 ```
 
+#### solution->error-build-git-spx ####
+筆者這裡就使用 `clean build` 就可以了.... 😉😉😉😉
+~~因為筆者沒有時間...~~
+
 -------------------------------------------------------------------------------
 ## issue-compile-no-pthread ##
-```gcc			================start================
+```c			================start================
 In file included from /workspace/Build/include/ipmi/IPMI_Main.h:26,
                  from thread.c:11:
 thread.c: In function ‘thread_init’:
@@ -296,7 +410,7 @@ make: *** Waiting for unfinished jobs....
 Unable to build the tree with the given PRJ and packages directory
 ```
 
-```bash			================start================
+```git			================start================
 ./common/packages/libAEWIN-src/data/device
 ./common/packages/libAEWIN-src/data/device/psu.c
 ./common/packages/libAEWIN-src/data/thread.c		//<--- just u !!!!!
@@ -341,8 +455,7 @@ other
 > [ref](https://blog.csdn.net/weixin_44153896/article/details/108217579)
 >> 在C語言中，任何非零和非空的值都被視為真[important](https://docs.pingcode.com/ask/304664.html)
 
-以上是基於C的理論 再來需要用 硬體設備的角度來看這個部分
-用示波器來看過 - 如果
+以上是基於C的理論
 
 ### array-factory ###
 陣列元素
@@ -397,8 +510,7 @@ PSU_INFO PSU_Device_Info[MAX_PSU_NUMBER] =
 };
 ```
 他是一個 struct 但是在用一個 array
-前人很多都用這樣的形勢!!!
-> EE涂的摯愛brian大神
+前人很多都用這樣的形勢!!! --  EE涂的摯愛brian大神
 
 ###  bmc_console_c_sh  ###
 這是有時候他的顯示很醜....
@@ -494,7 +606,7 @@ if(fan_closeloop_gpu_get_count < 1314520 ){
 > 因為 我們並不是一定需要取得一個很正確的數值
 > 這樣可能會 把全部卡死都有可能		---**其陽神話john**
 
-## other-no-read-gpio-old ##
+### other-no-read-gpio-old ###
 
 #### cant-read-GPIO-pin-conflic-by-same-GPIO ####
 ####TODO--peter
@@ -511,43 +623,10 @@ if(fan_closeloop_gpu_get_count < 1314520 ){
 後來發現 可能是 **linux device** 的掛載問題
 為什麼會發現這個問題 ~~我就是因為這樣 瘋狂加班呢~~
 一開始 是我只是到 有兩個 slot (這裡要看 電路圖)
-`\\192.168.101.240\sd00軟體研發處\SD20SW二部\03_Personal\ChiangChiang\project\1945\1945_gpu_temperature`
-[gpiu3](./pic/1945/p_1945_gpu_gpiu3.png)
-####TODO->what the wire to do
+`\\192.168.101.240\sd00軟體研發處\SD20SW二部\03_Personal\ChiangChiang\project\1945\1945_gpu_temperature\f036_cb-1945_20231115_rename.pdf`
+![gpiu3](./pic/1945/p_1945_gpu_gpiu3.png)
 
-#### two-gpio-present-pin-0error-1ok ####
 
-####TODO
-
-#### track-code-same-function-call ####
-
-```C			================start================
-        ret = gpio_read_data(GPU_1_PRESENT_PIN, &data);			// Reading GPU1 is pluged or not
-```
-
-```C			================start================
-//// /packages/common/packages/libAEWIN-src/data/Include/gpio.h
-// GPU card present pin         // Malo_Chou 2024-09-30 For GPU card present pin
-#define GPU_0_PRESENT_PIN   GPIO_('U', 3)
-#define GPU_1_PRESENT_PIN   GPIO_('U', 5)
-```
-
-```C			================start================
-| 1                                        | 2 | 3 | 4 |
-|------------------------------------------|---|---|---|
-| gpio_read_data //fan_sloseloop.c         |   |   |   |
-| ret=gpio_fn_r_data(&gpio_info) // gpio.c |   |   |   |
-| if( NULL != GPIO_FN[GPIO_FN_R_DATA])     |   |   |   |
-|
-```
-
-#### define-GPIO-0-PRESENT-PIN ####
-
-`/packages/common/packages/libAEWIN-src/data/device/fan_closeloop.c`
-```C			================start================
-////first find this part
-ret = gpio_read_data(GPU_0_PRESENT_PIN, &data);
-```
 
 ##### tip-vscode #####
 
@@ -625,13 +704,28 @@ code snip change 就是前面那段code 認不到
     }
 ```
 
+-------------------------------------------------------------------------------
+
+##### peter-excel-command-spc-not-well #####
+
+`/packages/common/packages/ipmi_dev-src/data/IPMI_AewinPrivateCmd.h`
+`AEWINIfcRWReq_T`
+
+`/packages/common/packages/libAEWIN-src/data/Include/AewinPrivateCmd.h`
+`./common/packages/libAEWIN-src/data/ipmi_cmd/aewin_cmdselect.c`
+`/packages/common/packages/libAEWIN-src/data/ipmi_cmd/aewin_cmdselect.c`
+`CMD_AEWIN_BIOS_POST_END`
+
+-------------------------------------------------------------------------------
+
+##### power-cycle-and-warm-boot #####
+這裡是我問  2024/10/24
 
 
-#### track-code ####
-所以在上面兩個章節
-[hardware-GPU-present-pin](#hardware-gpu-present-pin)
-[GPU-code-change-location](#gpu-code-change-location)
-如果有設備 是可以讀取到
-(if have device)
-+ `GPU_info[0] -> 0`
-+ `GPU_info[1] -> 1`
+|              | warm boot | power cycle |
+|--------------|-----------|-------------|
+| platfrom rst | V         | V           |
+| power off    |           | V           |
+
+> platform reset 只有 for reboot
+>        **--EE涂的摯愛brian大神**
