@@ -508,7 +508,7 @@ PSU_INFO PSU_Device_Info[MAX_PSU_NUMBER] =
 };
 ```
 他是一個 struct 但是在用一個 array
-前人很多都用這樣的形勢!!! --  EE涂的摯愛brian大神
+前人很多都用這樣的形勢!!! --  EE涂的摯愛brian恩碩大神
 
 ###  bmc_console_c_sh  ###
 這是有時候他的顯示很醜....
@@ -726,4 +726,4 @@ code snip change 就是前面那段code 認不到
 | power off    |           | V           |
 
 > platform reset 只有 for reboot
->        **--EE涂的摯愛brian大神**
+>        **--EE涂小良的摯愛brian恩碩大神**
