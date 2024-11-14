@@ -13,7 +13,8 @@ date	:	Wed Nov 13 14:04:27 CST 2024
 # overview #
 
 ┌───────┐				<br>
-│ 1945  │ (做法 功能)	<br>
+│[1945](#1945-gpu-card)
+│ (做法 功能)			<br>
 └───────┘				<br>
 + [GPU─present─pin](#gpu─present─pin)
   + [hardware─GPU─present─pin](#hardware─GPU─present─pin)
@@ -23,7 +24,8 @@ date	:	Wed Nov 13 14:04:27 CST 2024
   + [cold─boot─warm─boot](#cold─boot─warm─boot)
 
 ┌───────┐				<br>
-│ issue │(問題) 		<br>
+│[issue](#issue)
+│(問題) 				<br>
 └───────┘ 				<br>
 + [no─read─GPIO─pin](#no─read─GPIO─pin)
   + [solution─>no─read─GPIO─pin](#solution─>no─read─GPIO─pin)
@@ -33,7 +35,8 @@ date	:	Wed Nov 13 14:04:27 CST 2024
 + [issue─compile─no─pthread](#issue─compile─no─pthread)
 
 ┌───────┐ 						<br>
-│ other │(不是上面那些都是這裡) <br>
+│[other](#other)
+│(不是上面那些都是這裡) 		<br>
 └───────┘ 						<br>
 
 -------------------------------------------------------------------------------
@@ -65,7 +68,7 @@ summary : future
 
 > **present** 是幾乎不會壞的東西
 >>  這個是以上電 if(device=0) 就是直接low 到底
->>> --stroke
+>>> --stroke電訊號大神
 
 `ret` => 全部都是 function return
 所以 `ret == 0 ` ==>  GPU_present
