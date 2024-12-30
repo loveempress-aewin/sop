@@ -19,7 +19,7 @@ expand : UR BMC network CSM  ##TODO
 -------------------------------------------------------------------------------
 
 ## command list ##
-OS| command                                              | tag                | ref                        |
+| command                                              | tag                | ref                        |
 |:----------------------------------------------------:|:------------------:|:--------------------------:|
 | ipmitool user list 1                                 | change password    | [change](#change_password) |
 | ipmitool user set name 2 admin                       | change password    | [change](#change_password) |
@@ -49,6 +49,8 @@ OS| command                                              | tag                | 
 |                                                      |                    |                            |
 | ipmitool mc getenables                               |                    |                            |
 |                                                      |                    |                            |
+| ipmitool mc reset <cold/warm>                        | bmc                |                            |
+|                                                      |                    |                            |
 | ipmitool event 1/2/3                                 |                    |                            |
 |                                                      |                    |                            |
 | ipmitool sdr info                                    |                    |                            |
@@ -56,9 +58,11 @@ OS| command                                              | tag                | 
 | ipmitool sel elist -v                                |                    |                            |
 | ipmitool sel elist -vv                               |                    |                            |
 | ipmitool sel elist -vvvvv                            |                    |                            |
+| ipmitool sel save /tmp/test.txt                      | sel                |                            |
 |                                                      |                    |                            |
 | ipmitool chassis status                              |                    |                            |
 | ipmitool chassis policy always-off                   |                    |                            |
+
 
 -------------------------------------------------------------------------------
 ## change_password ##

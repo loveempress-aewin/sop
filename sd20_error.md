@@ -78,3 +78,14 @@ nameserver 8.8.8.8
 nameserver 114.114.114.114
 ```
 筆者我這裡只有用到這裡 然後重新啟動網路
+
+-------------------------------------------------------------------------------
+
+### error ###
+Tue Nov 26 09:48:29 CST 2024
+```bash			================start================
+####================output================>
+##fatal: unable to access 'http://sd20-server.aewin.com/core/lts/spx-13/EVB/ast2600evb.git/': Could not resolve host: sd20-server.aewin.com
+```
+
+

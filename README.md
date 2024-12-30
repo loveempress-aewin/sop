@@ -74,9 +74,3 @@ Simply put, it allows you to quickly find the corresponding files
   + 畫畫超好
   + 很機車...每次都會被笑死+氣死
   + 好人
-
-+ jeffrey
-  + tomasen lover
-  + 超壯
-  + 硬體王
-  + 新竹巴拿馬天菜乾隆天子南非女婿

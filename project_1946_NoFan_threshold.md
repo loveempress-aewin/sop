@@ -92,8 +92,7 @@ EX : like 1 CPU 2 CPU ...etc.
 location:`packages/libipmipar_ast2600evb_ami-ARM-AST2600-AST2600EVB-AMI-src/spx/RULES.py`
 ```python			================start================
 """ immersion """
-""" /mnt/AEWIN/codebase/ast2600evb/ast2600evb/packages/
-libipmipar_ast2600evb_ami-ARM-AST2600-AST2600EVB-AMI-src/spx/RULES.py """
+""" packages/libipmipar_ast2600evb_ami-ARM-AST2600-AST2600EVB-AMI-src/spx/RULES.py """
 	retval = Py_MkdirClean(TEMPDIR+"/"+PACKAGE+"/tmp/FSA_3500G")
 	if retval != 0:
 		return retval
