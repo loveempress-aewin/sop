@@ -4,10 +4,10 @@ created	:	.
 date	:	Wed Jan  8 09:19:35 CST 2025
 
 -------------------------------------------------------------------------------
+| [[git]] | [[basic]] |
 
-[[git]]
-[[basic]]
 [view hackMD from here](http://sd20-server.aewin.com:3000/SgJLrgSHS-yIw2jycGpl6w?both)
+
 [redir](http://sd20-server.aewin.com/Chin_Chiang/lovecodingqueen_sop/-/blob/master/git_basic.md)
 
 -------------------------------------------------------------------------------
