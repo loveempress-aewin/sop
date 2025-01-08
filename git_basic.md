@@ -3,12 +3,15 @@ created	:	.
 
 date	:	Wed Jan  8 09:19:35 CST 2025
 
+-------------------------------------------------------------------------------
+
 [[git]]
 [[basic]]
-[look_web](http://sd20-server.aewin.com:3000/SgJLrgSHS-yIw2jycGpl6w?both)
-[redir]
+[view hackMD from here](http://sd20-server.aewin.com:3000/SgJLrgSHS-yIw2jycGpl6w?both)
+[redir](http://sd20-server.aewin.com/Chin_Chiang/lovecodingqueen_sop/-/blob/master/git_basic.md)
 
 -------------------------------------------------------------------------------
+
 # git
 
 ## git main function
@@ -2652,3 +2655,5 @@ reset switch checkout revert
 ---
 
 # THE END
+
+[view hackMD from here](http://sd20-server.aewin.com:3000/SgJLrgSHS-yIw2jycGpl6w?both)
