@@ -7,6 +7,8 @@ date	:	.
 
 [[bbu]]
 
+[part ref](https://hackmd.io/3LkrW6mCQ-eNdRg_4ZF0fw)
+
 -------------------------------------------------------------------------------
 
 規範是由 john 大大來設計的
@@ -61,7 +63,11 @@ COM1 COM2 我一起寫
 所以 我們把它融合
 概念上 我們使用 COM1寫 COM2 讀 就OK
 
+Tue Feb 18 14:52:59 CST 2025
+這裡有[改版後的COM1 COM2](./com1_com2.md)
+
 ##  Buzzer Function              ##
+著筆者不多著墨
 ##  IPMITOOL                     ##
 這裡的測試就是用ipmitool tool
 
@@ -147,8 +153,7 @@ KVM 可以簡單說 就是類似 遠端的方式
 [測試目的](https://hackmd.io/@Malo850423/SJDyNqhh3#BBU-%E6%B8%AC%E8%A9%A6-):
 看是否能將MAC address寫入EEPROM中，並讀取到EEPROM內address
 
-筆者有[non auto](./bbu_mac_address.md)
-筆者沒有把這一個放入到自動化
+
 因為他改完mac address後
 bmc的網路會跑掉...
 
@@ -160,11 +165,33 @@ open bmc mac address -> EEPROM function
 ##  I2C Bus Recovery             ##
 ##  Slots Verification           ##
 ##  ipmitool stress test         ##
+這裡跟後面 [SEL over night test](#sel-over-night-test)
+感覺很像 但是還是有不同喔
+`//192.168.101.240/sd00軟體研發處/SD20SW二部/03_Personal/Malo/BBU/IPMI%20Stress%20Test%20V1.04.pdf`
+可以看這裡篇 然後筆者融會貫通說明一下
+這一篇是一直壓力測試
+用`ipmitool sdr` 的方式來找尋是否有非ok的項目
+
+> john 說過 同時也可以開很多的session 同時下 開好幾個也可以
+
 ##  Fan SEL                      ##
 ##  1 Fna Loses Function         ##
+這裡很物理 直接拔掉一個風扇 轉速要變快
 ##  2 Fans Malfunction           ##
 ##  "Power Policy"               ##
 `ipmitool chassis status`
 ##  System Isolation Test        ##
-##  SEL over night test          ##
+##  SEL-over-night-test          ##
+用script不停地依序下event command來發生event
+隔天再一併把記錄在下來
+
+> 筆者這裡有修正 畢竟sel
+> 這裡筆者使用的是 1945
+> `ipmitool sel` 就可以看到
+>> 3640
+>
+> 所以筆者有稍微改變抓取的時間
+
 ##  BMC Remote Media             ##
+這個因為他們密碼不會認得特殊字元
+所以有一段時間 筆者很崩潰....

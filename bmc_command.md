@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 created	:	Fri Aug  2 16:05:24 CST 2024
 
-date	:	Fri Aug 30 10:58:08 CST 2024
+date	:	Fri Jan 10 10:05:58 CST 2025
 
 expand : UR BMC network CSM  ##TODO
 [[bmc]]
@@ -19,49 +19,54 @@ expand : UR BMC network CSM  ##TODO
 -------------------------------------------------------------------------------
 
 ## command list ##
-| command                                              | tag                | ref                        |
-|:----------------------------------------------------:|:------------------:|:--------------------------:|
-| ipmitool user list 1                                 | change password    | [change](#change_password) |
-| ipmitool user set name 2 admin                       | change password    | [change](#change_password) |
-| ipmitool user set password 2 admin                   | change password    | [change](#change_password) |
-|                                                      |                    |                            |
-| ipmitool power status                                |                    | .                          |
-| ipmitool power off                                   |                    | .                          |
-| ipmitool power on                                    |                    | .                          |
-| ipmitool power cycle                                 |                    | .                          |
-|                                                      |                    |                            |
-| ipmitool raw 0x1c 0x0f 0x01 0x02 0x16 0x06 0x04      | manufacturing mode | [ref](#manufacturing_mode) |
-|                                                      |                    |                            |
-| ipmitool sensor thresh "CPU0 Temp." upper 40 50 60   |                    |                            |
-|                                                      |                    |                            |
-| ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE | watchdog           |                            |
-| ipmitool mc watchdog get                             | watchdog           |                            |
-| ipmitool mc watchdog reset                           | watchdog           |                            |
-|                                                      |                    |                            |
-| ipmitool raw 0x0c 0x01 0x01 0xc2                     | mac address        |                            |
-| ipmitool raw 0x0c 0x01 0x01 0x05 (0x__)*6            | mac address        |                            |
-|                                                      |                    |                            |
-| ipmitool lan print 1                                 | ip                 |                            |
-| ipmitool lan set 1 ipsrc dhcp                        | ip                 |                            |
-| ipmitool lan set 1 arp respond on                    | ip                 |                            |
-|                                                      |                    |                            |
-| ipmitool chassis status                              |                    |                            |
-|                                                      |                    |                            |
-| ipmitool mc getenables                               |                    |                            |
-|                                                      |                    |                            |
-| ipmitool mc reset <cold/warm>                        | bmc                |                            |
-|                                                      |                    |                            |
-| ipmitool event 1/2/3                                 |                    |                            |
-|                                                      |                    |                            |
-| ipmitool sdr info                                    |                    |                            |
-|                                                      |                    |                            |
-| ipmitool sel elist -v                                |                    |                            |
-| ipmitool sel elist -vv                               |                    |                            |
-| ipmitool sel elist -vvvvv                            |                    |                            |
-| ipmitool sel save /tmp/test.txt                      | sel                |                            |
-|                                                      |                    |                            |
-| ipmitool chassis status                              |                    |                            |
-| ipmitool chassis policy always-off                   |                    |                            |
+| command                                                   | tag                | ref                        |
+|:---------------------------------------------------------:|:------------------:|:--------------------------:|
+| ipmitool raw 0x1e 0x01 0x00                               | version            |                            |
+|                                                           |                    |                            |
+| ipmitool user list 1                                      | change password    | [change](#change_password) |
+| ipmitool user set name 2 admin                            | change password    | [change](#change_password) |
+| ipmitool user set password 2 admin                        | change password    | [change](#change_password) |
+|                                                           |                    |                            |
+| ipmitool power status                                     |                    | .                          |
+| ipmitool power off                                        |                    | .                          |
+| ipmitool power on                                         |                    | .                          |
+| ipmitool power cycle                                      |                    | .                          |
+|                                                           |                    |                            |
+| ipmitool raw 0x1c 0x0f 0x01 0x02 0x16 0x06 0x04           | manufacturing mode | [ref](#manufacturing_mode) |
+|                                                           |                    |                            |
+| ipmitool sensor thresh "CPU0 Temp." upper 40 50 60        |                    |                            |
+|                                                           |                    |                            |
+| ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE      | watchdog           |                            |
+| ipmitool mc watchdog get                                  | watchdog           |                            |
+| ipmitool mc watchdog reset                                | watchdog           |                            |
+|                                                           |                    |                            |
+| ipmitool raw 0x0c 0x01 0x01 0xc2                          | mac address        |                            |
+| ipmitool raw 0x0c 0x01 0x01 0x05 (0x__)*6                 | mac address        |                            |
+|                                                           |                    |                            |
+| ipmitool lan print 1                                      | ip                 |                            |
+| ipmitool lan set 1 ipsrc dhcp                             | ip                 |                            |
+| ipmitool lan set 1 arp respond on                         | ip                 |                            |
+|                                                           |                    |                            |
+| ipmitool chassis status                                   |                    |                            |
+|                                                           |                    |                            |
+| ipmitool mc getenables                                    |                    |                            |
+|                                                           |                    |                            |
+| ipmitool mc reset <cold/warm>                             | bmc                |                            |
+|                                                           |                    |                            |
+| ipmitool event 1/2/3                                      |                    |                            |
+|                                                           |                    |                            |
+| ipmitool sdr info                                         |                    |                            |
+|                                                           |                    |                            |
+| ipmitool sel elist -v                                     | sel                |                            |
+| ipmitool sel elist -vv                                    |                    |                            |
+| ipmitool sel elist -vvvvv                                 |                    |                            |
+| ipmitool sel save /tmp/test.txt                           | sel                |                            |
+| ipmitool sel add ./sel.txt                                | sel                |                            |
+|                                                           |                    |                            |
+| ipmitool chassis status                                   |                    |                            |
+| ipmitool chassis policy always-off                        |                    |                            |
+|                                                           |                    |                            |
+| ipmitool raw 0x1c 0x01 0x02 0x04 0xac 0x00 0x02 0xbb 0x03 |                    |                            |
 
 
 -------------------------------------------------------------------------------
@@ -91,7 +96,7 @@ ipmitool channel setaccess 1 2 callin=on ipmi=on link=on privilege=4
 
 #  manufacturing_mode #
 + 如果 沒有開啟 manufacturing_mode
-  + 訊號會被BMC 可能拉掉
+  + 訊號會被BMC 可能掉
 - 如果開啟 manufacturing_mode 就是給使用者看狀態
   + 此時的設備不會被BMC其他設備拉掉
 

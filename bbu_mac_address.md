@@ -83,3 +83,75 @@ Unable to send RAW command (channel=0x0 netfn=0xc lun=0x0 cmd=0x1 rsp=0xcc): Inv
 but!!!
 是  %2==0 才對
 (天啊!! 真的是I2C 只喜歡 偶數 ....)
+
+-------------------------------------------------------------------------------
+筆者這裡用 ssh OS下 ipmitool
+優點不會變動 但是筆者只有事過一次 所以也不清楚
+```bash			================stqrt================
+root 13:46:32 ~ -->ipmitool lan print 1
+Set in Progress         : Set Complete
+Auth Type Support       :
+Auth Type Enable        : Callback :
+                        : User     :
+                        : Operator :
+                        : Admin    :
+                        : OEM      :
+IP Address Source       : DHCP Address
+IP Address              : 192.168.199.15
+Subnet Mask             : 255.255.255.0
+MAC Address             : 00:0d:48:56:a1:83
+SNMP Community String   : AMI
+IP Header               : TTL=0x40 Flags=0x40 Precedence=0x00 TOS=0x10
+BMC ARP Control         : ARP Responses Enabled, Gratuitous ARP Disabled
+Gratituous ARP Intrvl   : 1.0 seconds
+Default Gateway IP      : 192.168.199.1
+Default Gateway MAC     : c4:6e:1f:b4:8e:d0
+Backup Gateway IP       : 0.0.0.0
+Backup Gateway MAC      : 00:00:00:00:00:00
+802.1q VLAN ID          : Disabled
+802.1q VLAN Priority    : 0
+RMCP+ Cipher Suites     : 3,17
+Cipher Suite Priv Max   : XXXaXXXXXXXaXXX
+```
+
+```bash			================start================
+root 13:54:06 ~ -->  ipmitool raw 0x0c 0x01 0x01 0xc2
+
+root 13:54:32 ~ -->  ipmitool raw 0x0c 0x01 0x01 0x05 0x00 0x0d 0x48 0x56 0xa1 0x83
+
+root 13:54:39 ~ -->  ipmitool lan print 1
+Set in Progress         : Set Complete
+Auth Type Support       :
+Auth Type Enable        : Callback :
+                        : User     :
+                        : Operator :
+                        : Admin    :
+                        : OEM      :
+IP Address Source       : DHCP Address
+IP Address              : 192.168.199.15
+Subnet Mask             : 255.255.255.0
+MAC Address             : 00:0d:48:56:a1:83
+SNMP Community String   : AMI
+IP Header               : TTL=0x40 Flags=0x40 Precedence=0x00 TOS=0x10
+BMC ARP Control         : ARP Responses Enabled, Gratuitous ARP Disabled
+Gratituous ARP Intrvl   : 1.0 seconds
+Default Gateway IP      : 192.168.199.1
+Default Gateway MAC     : c4:6e:1f:b4:8e:d0
+Backup Gateway IP       : 0.0.0.0
+Backup Gateway MAC      : 00:00:00:00:00:00
+802.1q VLAN ID          : Disabled
+802.1q VLAN Priority    : 0
+RMCP+ Cipher Suites     : 3,17
+Cipher Suite Priv Max   : XXXaXXXXXXXaXXX
+                        :     X=Cipher Suite Unused
+                        :     c=CALLBACK
+                        :     u=USER
+                        :     o=OPERATOR
+                        :     a=ADMIN
+                        :     O=OEM
+Bad Password Threshold  : 0
+Invalid password disable: no
+Attempt Count Reset Int.: 0
+User Lockout Interval   : 0
+```
+

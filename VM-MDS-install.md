@@ -1,8 +1,7 @@
 -------------------------------------------------------------------------------
 created	:	Fri Sep 13 08:54:12 CST 2024
 
-date	:	.
-
+date	:	Wed Jan 15 17:23:25 CST 2025
 
 -------------------------------------------------------------------------------
 
@@ -295,3 +294,60 @@ git clone https://git_user:$ami_us_git_token@git.ami.com/tools/mds/releases/13.5
 
 > 筆者用的是虛擬機器連結到虛擬機 (所以如果用這個指令 具需要直接在 VM的虛擬機)
 
+
+-------------------------------------------------------------------------------
+
+## mds-tool-error-npm-ssh ##
+```bash			================start================
+Grunt/Bower/coveralls are required and one or more is not present. Installing them now...
+▌ ╢░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░╟
+WARN engine grunt-cli@1.5.0: wanted: {"node":">=10"} (current: {"node":"8.10.0","npm":"3.5.2"})
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+npm ERR! Linux 5.4.0-150-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "i" "-gq" "grunt-cli" "bower" "coveralls"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code EMISSINGARG
+
+npm ERR! typeerror Error: Missing required argument #1
+npm ERR! typeerror     at andLogAndFinish (/usr/share/npm/lib/fetch-package-metadata.js:31:3)
+npm ERR! typeerror     at fetchPackageMetadata (/usr/share/npm/lib/fetch-package-metadata.js:51:22)
+npm ERR! typeerror     at resolveWithNewModule (/usr/share/npm/lib/install/deps.js:456:12)
+npm ERR! typeerror     at /usr/share/npm/lib/install/deps.js:457:7
+npm ERR! typeerror     at /usr/share/npm/node_modules/iferr/index.js:13:50
+npm ERR! typeerror     at /usr/share/npm/lib/fetch-package-metadata.js:37:12
+npm ERR! typeerror     at addRequestedAndFinish (/usr/share/npm/lib/fetch-package-metadata.js:82:5)
+npm ERR! typeerror     at returnAndAddMetadata (/usr/share/npm/lib/fetch-package-metadata.js:117:7)
+npm ERR! typeerror     at pickVersionFromRegistryDocument (/usr/share/npm/lib/fetch-package-metadata.js:134:20)
+npm ERR! typeerror     at /usr/share/npm/node_modules/iferr/index.js:13:50
+npm ERR! typeerror This is an error with npm itself. Please report this error at:
+npm ERR! typeerror     <http://github.com/npm/npm/issues>
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /tmp/selfgz1965128359/npm-debug.log
+Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Reading state information... Done
+Selecting previously unselected package spx-builder.
+(Reading database ... 174434 files and directories currently installed.)
+Preparing to unpack spx-builder-13.0-x86_64.deb ...
+Unpacking spx-builder (13.0) ...
+Setting up spx-builder (13.0) ...
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Reading state information... Done
+Selecting previously unselected package svnspx.
+(Reading database ... 174845 files and directories currently installed.)
+Preparing to unpack svnspx-13.0-x86_64.deb ...
+Unpacking svnspx (13.0) ...
+Setting up svnspx (13.0) ...
+
+Cppcheck Version Requirement matched.
+
+To launch MDS use: sudo MDS -clean
+```
