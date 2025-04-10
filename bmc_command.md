@@ -46,6 +46,10 @@ expand : UR BMC network CSM  ##TODO
 | ipmitool lan print 1                                      | ip                 |                            |
 | ipmitool lan set 1 ipsrc dhcp                             | ip                 |                            |
 | ipmitool lan set 1 arp respond on                         | ip                 |                            |
+| ipmitool lan set 1 ipsrc static                           | static             |                            |
+| ipmitool lan set 1 ipaddr 192.168.199.120                 | static             |                            |
+| ipmitool lsn set 1 netmask 255.255.255.0                  | static             |                            |
+| ipmitool lan set 1 defgw ipaddr 192.168.199.1             | static             |                            |
 |                                                           |                    |                            |
 | ipmitool chassis status                                   |                    |                            |
 |                                                           |                    |                            |
@@ -67,6 +71,7 @@ expand : UR BMC network CSM  ##TODO
 | ipmitool chassis policy always-off                        |                    |                            |
 |                                                           |                    |                            |
 | ipmitool raw 0x1c 0x01 0x02 0x04 0xac 0x00 0x02 0xbb 0x03 |                    |                            |
+| ipmitool user set password 2 11111111                     | change pwd         |                            |
 
 
 -------------------------------------------------------------------------------
@@ -220,4 +225,11 @@ Power Control Fault  : false
 Power Restore Policy : always-on
 ```
 
+## set bmc time ##
+[get time](https://wenku.csdn.net/answer/2fvda29yfd)
+```bash ====sss================================================================
+ipmitool sel time get
 
+ipmitool sel time set "MM/DD/YYY HH:MM:SS"
+ipmitool sel time set "03/28/2025 11:05:23"
+```

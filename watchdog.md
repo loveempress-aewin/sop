@@ -121,9 +121,35 @@ expand --> 20 secs
 # ├── power_S5.md
 # ├─ipmitool raw 0x06 0x24 0xAA 0xZZ 0x01 0xQQ 0xDD 0xEE
 ```
+
+
 ```bash			================start================
 ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0x64 0x00
     ### 10s
 ipmitool raw 0x06 0x24 0x03 0x03 0x01 0x10 0x1e 0x00
     ### 3s
 ```
+
+# table #
+
+筆者這裡要說明新增 一個事件~
+
+這也是後來才發現的
+
+雖然筆者寫過`AA` and `QQ` 不同分為 還是可以正確執行
+
+但是可能還是筆者這裡還是沒有 用不同的來TEST
+
+畢竟這就是BBU TEST 的宿命
+
+所以這裡筆者要 寫一個對照組別
+
+####TODO : need to put AA and QQ terms!
+
+| AA   | QQ   | name       |
+|:----:|:----:|:----------:|
+| 0x01 | 0x02 | BIOS FRRB2 |
+| 0x02 | 0x04 | BIOS/POST  |
+| 0x03 | 0x08 | OS Load    |
+| 0x04 | 0x10 | SMS/OS     |
+| 0x05 | 0x20 | OEM        |

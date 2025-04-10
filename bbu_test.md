@@ -181,6 +181,7 @@ open bmc mac address -> EEPROM function
 ##  "Power Policy"               ##
 `ipmitool chassis status`
 ##  System Isolation Test        ##
+`ipmitool mc reset cold` will not make system reset or shutdown
 ##  SEL-over-night-test          ##
 用script不停地依序下event command來發生event
 隔天再一併把記錄在下來

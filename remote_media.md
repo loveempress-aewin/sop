@@ -152,6 +152,7 @@ BMC setting
 `https://192.168.120.198/#settings`
 ![setting](./pic/remote_media_bmcset_0.png)
 
+
 ### set bmc mount visual   ###
 1. check✅Remote Media Support
 2. check✅Mount CD/DVD
@@ -162,6 +163,7 @@ BMC setting
 7. Password : <password> (windows password)
 ![general](./pic/remote_media_bmcset_2_gene.png)
 
+筆者這裡的Username `chiangchiang` (好像沒有大小寫 之前我放筆者的 email 就不能成功)
 `https://192.168.120.198/#settings/media/instance`
 > need to set it  --> because no set --> didnt get visual mount
 

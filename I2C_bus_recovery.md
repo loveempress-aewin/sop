@@ -30,9 +30,13 @@ date	:	Wed Jun 26 14:46:37 CST 2024
 └─────────────────────────┘
 # 聰明的你們一定看得出來 這就是圖片的意思
 ```
-> strock : 你們用 PMBUS 走 SMBUS 沒有問題
+> stroke : 你們用 PMBUS 走 SMBUS 沒有問題
 > 你們用PMBUS 測試 I2C recovery 也沒有問題
 > 但是你們的PMBUS 卻是走SMBUS的通道
+
+> 問題點為 : 因為有很多的 SMBUS
+> 我們BMC只用 一個 SMBUS 走PMBUS
+> 然後
 
 上面的問題點 請確認精準度
 
@@ -81,7 +85,11 @@ BMC 會釋放 **reset 波形的信號**
 搜尋 J38 就會知道哪裡接 SDA OR LCK
 ![motherb](./pic/I2C_bus_recovery_motherboard.jpg)
 
-SDA CLK GND VCC
+1. SDA
+2. CLK
+3. GND
+4. VCC
+
 ![connect_de](./pic/I2C_bus_recovery_connect.jpg)
 
 這裡我是依照 brian's al dupont lines 的紅色來看(反正不是CLK 就是 SDA)
